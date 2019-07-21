@@ -11,7 +11,7 @@ before_install:
 - if [[ -e $HOME/docker/stahl_bootstrap-builder.tgz ]]; then zcat $HOME/docker/stahl_bootstrap-builder.tgz | docker load; fi
 - docker build -t remexre/stahl_bootstrap-builder .travis
 
-script: docker run -v "$PWD:/code" --rm remexre/stahl_bootstrap-builder make ci
+script: docker run -v "$PWD:/code" --rm remexre/stahl_bootstrap-builder make ci-inner
 
 before_cache:
 - mkdir -p $HOME/docker
