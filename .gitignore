@@ -1,6 +1,7 @@
 .*
 !.dockerignore
 !.gitignore
+!.travis/
 !.travis.yml
 
 _build/

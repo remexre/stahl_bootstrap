@@ -1,9 +1,9 @@
-stahl
-=====
+stahl_bootstrap
+===============
 
-[![Build Status](https://travis-ci.org/remexre/stahl.svg?branch=master)](https://travis-ci.org/remexre/stahl)
+[![Build Status](https://travis-ci.org/remexre/stahl_bootstrap.svg?branch=master)](https://travis-ci.org/remexre/stahl_bootstrap)
 
-A dependently typed language with algebraic effects.
+(The bootstrap compiler for) a dependently typed language with algebraic effects.
 
 Implementation Goals
 --------------------
