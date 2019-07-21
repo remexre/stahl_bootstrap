@@ -5,7 +5,7 @@ ci:
 ci-inner: clean all
 	chown -R $(shell stat -c "%u:%g" Makefile) .
 clean: clean-tmp
-	rm -r out
+	rm -rf out
 clean-tmp:
 	dune clean
 watch:
