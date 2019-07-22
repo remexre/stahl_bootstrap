@@ -1,19 +1,21 @@
-all: out/stahl_bootstrap
+all: build test
+build: out/stahl-bootstrap
 ci:
-	docker build -t remexre/stahl_bootstrap-builder .travis
-	docker run -v "$(shell pwd):/code" --rm remexre/stahl_bootstrap-builder make ci-inner
-ci-inner: clean all
-	chown -R $(shell stat -c "%u:%g" Makefile) .
-clean: clean-tmp
+	docker build -t remexre/stahl-bootstrap-builder .travis
+	docker run -v "$(shell pwd):/code" --rm remexre/stahl-bootstrap-builder make ci-inner
+ci-inner:
+	sh -c "trap 'chown -R $(shell stat -c "%u:%g" Makefile) .' EXIT; $(MAKE) clean all"
+clean:
+	cabal v2-clean
 	rm -rf out
-clean-tmp:
-	dune clean
+test:
+	cabal v2-test --enable-tests 
 watch:
-	watchexec -cre ml $(MAKE)
-.PHONY: all ci clean clean-tmp watch
+	watchexec -cre cabal,hs -i 'dist-newstyle/**' $(MAKE)
+.PHONY: all build ci ci-inner clean test watch
 
-out/stahl_bootstrap:
+out/stahl-bootstrap:
 	@mkdir -p $(dir $@)
-	dune build stahl_bootstrap.exe
-	@cp _build/default/stahl_bootstrap.exe $@
-.PHONY: out/stahl_bootstrap
+	cabal v2-build
+	@cp `cabal v2-exec -- which stahl-bootstrap` $@
+.PHONY: out/stahl-bootstrap

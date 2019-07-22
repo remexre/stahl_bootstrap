@@ -4,5 +4,6 @@
 !.travis/
 !.travis.yml
 
-_build/
+dist/
+dist-newstyle/
 out/

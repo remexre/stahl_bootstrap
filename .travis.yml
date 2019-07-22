@@ -8,19 +8,19 @@ cache:
     - $HOME/docker
 
 before_install:
-- if [[ -e $HOME/docker/stahl_bootstrap-builder.tgz ]]; then zcat $HOME/docker/stahl_bootstrap-builder.tgz | docker load; fi
-- docker build -t remexre/stahl_bootstrap-builder .travis
+- if [[ -e $HOME/docker/stahl-bootstrap-builder.tgz ]]; then zcat $HOME/docker/stahl-bootstrap-builder.tgz | docker load; fi
+- docker build -t remexre/stahl-bootstrap-builder .travis
 
-script: docker run -v "$PWD:/code" --rm remexre/stahl_bootstrap-builder make ci-inner
+script: docker run -v "$PWD:/code" --rm remexre/stahl-bootstrap-builder make ci-inner
 
 before_cache:
 - mkdir -p $HOME/docker
-- docker save remexre/stahl_bootstrap-builder $(docker history -q remexre/stahl_bootstrap-builder | grep -v missing) | gzip > $HOME/docker/stahl_bootstrap-builder.tgz
+- docker save remexre/stahl-bootstrap-builder $(docker history -q remexre/stahl-bootstrap-builder | grep -v missing) | gzip > $HOME/docker/stahl-bootstrap-builder.tgz
 
 deploy:
 - provider: releases
   api_key: $GITHUB_TOKEN
-  file: out/stahl_bootstrap
+  file: out/stahl-bootstrap
   on:
     tags: true
   skip_cleanup: true
